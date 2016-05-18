@@ -2,5 +2,6 @@
     <string name="app_name">ExemploListActivity</string>
     <string name="action_refresh">Refresh</string>
     <string name="action_add">Add</string>
-
+    <string name="header_menu_tarefa">Ações na Tarefa</string>
+    <string name="web_service_root_url">http://192.168.1.4:8080/api/v1/tarefa</string>
 </resources>

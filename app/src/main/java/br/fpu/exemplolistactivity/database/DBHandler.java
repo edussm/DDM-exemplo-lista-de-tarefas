@@ -14,7 +14,7 @@ import br.fpu.exemplolistactivity.domain.Tarefa;
 
 
 public class DBHandler extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "lista-de-tarefas";
 
     private static final String TABLE_TAREFA = "tarefa";
@@ -50,7 +50,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(KEY_DESCRICAO, tarefa.getDescricao());
-        values.put(KEY_RESPONSAVEL, tarefa.getResponsavel());
+        values.put(KEY_RESPONSAVEL, tarefa.getExecutor());
         values.put(KEY_STATUS, tarefa.getStatus().toString());
 
         db.insert(TABLE_TAREFA, null, values);
@@ -69,9 +69,9 @@ public class DBHandler extends SQLiteOpenHelper {
         if (cursor != null) {
             cursor.moveToFirst();
             tarefa = new Tarefa();
-            tarefa.setId(cursor.getInt(0));
+            tarefa.setId(cursor.getLong(0));
             tarefa.setDescricao(cursor.getString(1));
-            tarefa.setResponsavel(cursor.getString(2));
+            tarefa.setExecutor(cursor.getString(2));
             tarefa.setStatus(Status.valueOf(cursor.getString(3)));
         }
 
@@ -88,9 +88,9 @@ public class DBHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Tarefa tarefa = new Tarefa();
-                tarefa.setId(cursor.getInt(0));
+                tarefa.setId(cursor.getLong(0));
                 tarefa.setDescricao(cursor.getString(1));
-                tarefa.setResponsavel(cursor.getString(2));
+                tarefa.setExecutor(cursor.getString(2));
                 tarefa.setStatus(Status.valueOf(cursor.getString(3)));
                 tarefas.add(tarefa);
             } while (cursor.moveToNext());
@@ -103,7 +103,7 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_DESCRICAO, tarefa.getDescricao());
-        values.put(KEY_RESPONSAVEL, tarefa.getResponsavel());
+        values.put(KEY_RESPONSAVEL, tarefa.getExecutor());
         values.put(KEY_STATUS, tarefa.getStatus().toString());
 
         return db.update(TABLE_TAREFA, values, KEY_ID + " = ?",

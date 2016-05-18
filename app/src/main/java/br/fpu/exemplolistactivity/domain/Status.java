@@ -1,5 +1,5 @@
 package br.fpu.exemplolistactivity.domain;
 
 public enum Status {
-    FILA, EXECUTANDO, TERMINADO;
+	PENDENTE, EM_EXECUCAO, CONCLUIDA;
 }
